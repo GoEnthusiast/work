@@ -1,0 +1,11 @@
+code
+data
+logs
+node_modules
+.DS_Store
+.idea
+*.exe
+*.test
+*.out
+*.prof
+server-code-ctl/server-code-ctl
