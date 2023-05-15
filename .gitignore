@@ -9,3 +9,4 @@ node_modules
 *.out
 *.prof
 server-code-ctl/server-code-ctl
+spider-code-ctl/spider-code-ctl
