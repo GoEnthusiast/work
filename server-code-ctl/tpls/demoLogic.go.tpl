@@ -1,7 +1,9 @@
 package demoLogic
 
 import (
+    "fmt"
 	"{{.projectName}}/internal/svc"
+	"{{.projectName}}/types"
 	commonRespx "github.com/GoEnthusiast/gin-common/responsex"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -91,4 +93,10 @@ func (l *DemoLogic) JwtParse() (any, *commonRespx.E) {
 		return nil, commonRespx.CodeServerError.WithDetails(err.Error())
 	}
 	return clamis, nil
+}
+
+func (l *DemoLogic) ParamVerify(req *types.DemoRequest) (any, *commonRespx.E) {
+	zap.L().Info(fmt.Sprintf("%d", req.UserID))
+	zap.L().Info(req.UserName)
+	return map[string]string{"msg": "demo"}, nil
 }

@@ -40,7 +40,7 @@ func main() {
 	builds = append(builds, &Build{Path: "internal/model/demoModel", GoFileName: "demoModel.go", TemplateFileName: "demoModel.go.tpl", Data: map[string]string{}})
 	builds = append(builds, &Build{Path: "", GoFileName: "main.go", TemplateFileName: "main.go.tpl", Data: map[string]string{"projectName": *projectName}})
 	builds = append(builds, &Build{Path: "common", GoFileName: "", TemplateFileName: "", Data: map[string]string{}, Dir: true})
-	builds = append(builds, &Build{Path: "types", GoFileName: "", TemplateFileName: "", Data: map[string]string{}, Dir: true})
+	builds = append(builds, &Build{Path: "types", GoFileName: "types.go", TemplateFileName: "types.go.tpl", Data: map[string]string{}})
 
 	for _, build := range builds {
 		// 创建文件夹

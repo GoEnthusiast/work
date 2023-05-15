@@ -25,6 +25,7 @@ func Register(s *http.Server, svcCtx *svc.ServiceContext) {
 	r.GET("/demo/stream", demoController.DemoStreamController(svcCtx))
 	r.GET("/demo/jwt/generate", demoController.DemoJwtGenerate(svcCtx))
 	r.POST("/demo/jwt/parse", demoController.DemoJwtParse(svcCtx))
+	r.POST("/demo/param/verify", demoController.DemoParamVerify(svcCtx))
 
 	s.Handler = r
 }

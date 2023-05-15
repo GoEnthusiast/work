@@ -3,6 +3,7 @@ package demoController
 import (
 	"{{.projectName}}/internal/logic/demoLogic"
 	"{{.projectName}}/internal/svc"
+	"{{.projectName}}/types"
 	commonRespx "github.com/GoEnthusiast/gin-common/responsex"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -134,6 +135,30 @@ func DemoJwtParse(svcCtx *svc.ServiceContext) gin.HandlerFunc {
 	return func(ginCtx *gin.Context) {
 		l := demoLogic.NewDemoLogic(svcCtx, ginCtx)
 		resp, err := l.JwtParse()
+		if err != nil {
+			commonRespx.WriteJson(ginCtx, nil, err)
+			return
+		}
+		commonRespx.WriteJson(ginCtx, resp, nil)
+	}
+}
+
+// DemoParamVerify
+/*
+	参数解析
+*/
+func DemoParamVerify(svcCtx *svc.ServiceContext) gin.HandlerFunc {
+	return func(ginCtx *gin.Context) {
+		var req types.DemoRequest
+		// 参数验证
+		if err := req.ParseGinContext(ginCtx); err != nil {
+			zap.L().Error(err.Error())
+			commonRespx.WriteJson(ginCtx, nil, commonRespx.CodeInvalidParams.WithDetails(err.Error()))
+			return
+		}
+
+		l := demoLogic.NewDemoLogic(svcCtx, ginCtx)
+		resp, err := l.ParamVerify(&req)
 		if err != nil {
 			commonRespx.WriteJson(ginCtx, nil, err)
 			return
