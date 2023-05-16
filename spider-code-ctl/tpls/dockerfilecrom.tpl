@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y cron && apt-get -y install vim
 WORKDIR /go
 COPY {{.exefile}} .
 COPY ./etc/* ./etc/
-COPY cronjob /etc/cron.d/cronjob
+
+ARG CRONJOB_FILE
+COPY ${CRONJOB_FILE} /etc/cron.d/cronjob
 
 RUN chmod +x {{.exefile}}
 RUN chmod 0644 /etc/cron.d/cronjob

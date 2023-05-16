@@ -2,7 +2,7 @@
 ```shell
 docker images|grep none|awk '{print $3}'|xargs docker rmi
 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build
-docker build -t develop:{{.projectName}} .
+docker build --build-arg CRONJOB_FILE=./etc/cronjob.develop -t develop:{{.projectName}} .
 docker stop {{.projectName}}
 docker rm {{.projectName}}
 rm -rf {{.projectName}}

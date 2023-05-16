@@ -30,13 +30,17 @@ func main() {
 
 	var builds []*Build
 	builds = append(builds, &Build{Path: "etc", GoFileName: "config.develop.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
+	builds = append(builds, &Build{Path: "etc", GoFileName: "config.test.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
+	builds = append(builds, &Build{Path: "etc", GoFileName: "config.prod.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
 	builds = append(builds, &Build{Path: "internal/config", GoFileName: "config.go", TemplateFileName: "config.go.tpl", Data: map[string]string{}})
 	builds = append(builds, &Build{Path: "internal/logic", GoFileName: "logic.go", TemplateFileName: "logic.go.tpl", Data: map[string]string{"projectName": *projectName}})
 	builds = append(builds, &Build{Path: "internal/svc", GoFileName: "serviceContext.go", TemplateFileName: "serviceContext.go.tpl", Data: map[string]string{"projectName": *projectName}})
 	builds = append(builds, &Build{Path: "", GoFileName: "main.go", TemplateFileName: "main.go.tpl", Data: map[string]string{"projectName": *projectName}})
 
 	if *cron {
-		builds = append(builds, &Build{Path: "", GoFileName: "cronjob", TemplateFileName: "cronjob.tpl", Data: map[string]string{"projectName": *projectName}})
+		builds = append(builds, &Build{Path: "etc", GoFileName: "cronjob.develop", TemplateFileName: "cronjob.develop.tpl", Data: map[string]string{"projectName": *projectName}})
+		builds = append(builds, &Build{Path: "etc", GoFileName: "cronjob.test", TemplateFileName: "cronjob.test.tpl", Data: map[string]string{"projectName": *projectName}})
+		builds = append(builds, &Build{Path: "etc", GoFileName: "cronjob.prod", TemplateFileName: "cronjob.prod.tpl", Data: map[string]string{"projectName": *projectName}})
 		builds = append(builds, &Build{Path: "", GoFileName: "Dockerfile", TemplateFileName: "dockerfilecrom.tpl", Data: map[string]string{"exefile": *projectName}})
 		builds = append(builds, &Build{Path: "", GoFileName: "README.md", TemplateFileName: "readmecron.tpl", Data: map[string]string{"projectName": *projectName, "dockerNetWork": *dockerNetWork}})
 	} else {
