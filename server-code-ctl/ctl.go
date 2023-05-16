@@ -14,8 +14,8 @@ type Build struct {
 	Dir              bool
 }
 
-var projectName = flag.String("name", "", "the spider project name")
-var templatePath = flag.String("home", "./tpls", "the spider go file template")
+var projectName = flag.String("name", "", "the server project name")
+var templatePath = flag.String("home", "./tpls", "the server go file template")
 
 func main() {
 	// 读取命令行参数
@@ -27,6 +27,8 @@ func main() {
 
 	var builds []*Build
 	builds = append(builds, &Build{Path: "etc", GoFileName: "config.develop.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
+	builds = append(builds, &Build{Path: "etc", GoFileName: "config.test.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
+	builds = append(builds, &Build{Path: "etc", GoFileName: "config.prod.yaml", TemplateFileName: "config.develop.yaml.tpl", Data: map[string]string{"projectName": *projectName}})
 	builds = append(builds, &Build{Path: "etc", GoFileName: "rbac_model.conf", TemplateFileName: "rbac_model.conf.tpl", Data: map[string]string{}})
 	builds = append(builds, &Build{Path: "internal/config", GoFileName: "config.go", TemplateFileName: "config.go.tpl", Data: map[string]string{}})
 	builds = append(builds, &Build{Path: "internal/controller", GoFileName: "controller.go", TemplateFileName: "controller.go.tpl", Data: map[string]string{"projectName": *projectName}})
