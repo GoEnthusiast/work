@@ -13,7 +13,7 @@ docker run -it --privileged --restart=no --entrypoint="./{{.projectName}}" --nam
 ```shell
 docker images|grep none|awk '{print $3}'|xargs docker rmi
 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build
-docker build -t registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.test .
+docker build --platform linux/amd64 -t registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.test .
 docker push registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.test
 rm -rf {{.projectName}}
 ```
@@ -30,7 +30,7 @@ docker run -itd --privileged --restart=unless-stopped --entrypoint="./{{.project
 ```shell
 docker images|grep none|awk '{print $3}'|xargs docker rmi
 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build
-docker build -t registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.prod .
+docker build --platform linux/amd64 -t registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.prod .
 docker push registry.cn-hangzhou.aliyuncs.com/yyy-mobile/spiders:{{.projectName}}.prod
 rm -rf {{.projectName}}
 ```
